@@ -2,7 +2,9 @@
   <dictionary name="DQMac">
     <words>
       <w>coords</w>
+      <w>gles</w>
       <w>googletrainingopengles</w>
+      <w>mediump</w>
     </words>
   </dictionary>
 </component>

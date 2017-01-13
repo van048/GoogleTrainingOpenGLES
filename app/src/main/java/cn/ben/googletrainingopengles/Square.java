@@ -7,11 +7,12 @@ import java.nio.ShortBuffer;
 
 class Square {
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final FloatBuffer vertexBuffer;
+    @SuppressWarnings("FieldCanBeLocal")
     private final ShortBuffer drawListBuffer;
 
     // number of coordinates per vertex in this array
-    // TODO: 2017/1/13  
     static final int COORDS_PER_VERTEX = 3;
     private static final float[] squareCoords = {
             -0.5f,  0.5f, 0.0f,   // top left
@@ -19,9 +20,10 @@ class Square {
             0.5f, -0.5f, 0.0f,   // bottom right
             0.5f,  0.5f, 0.0f }; // top right
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final short[] drawOrder = { 0, 1, 2, 0, 2, 3 }; // order to draw vertices
 
-    // TODO: 2017/1/13  
+    // TODO: 2017/1/13
     public Square() {
         // initialize vertex byte buffer for shape coordinates
         ByteBuffer bb = ByteBuffer.allocateDirect(
