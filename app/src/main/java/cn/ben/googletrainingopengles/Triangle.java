@@ -11,9 +11,16 @@ class Triangle {
     // TODO: 2017/1/13  
     @SuppressWarnings("FieldCanBeLocal")
     private final String vertexShaderCode =
-            "attribute vec4 vPosition;" +
+            // This matrix member variable provides a hook to manipulate
+            // the coordinates of the objects that use this vertex shader
+            "uniform mat4 uMVPMatrix;" +
+                    "attribute vec4 vPosition;" +
                     "void main() {" +
-                    "  gl_Position = vPosition;" +
+                    // TODO: 2017/1/14 a modifier
+                    // the matrix must be included as a modifier of gl_Position
+                    // Note that the uMVPMatrix factor *must be first* in order
+                    // for the matrix multiplication product to be correct.
+                    "  gl_Position = uMVPMatrix * vPosition;" +
                     "}";
 
     // TODO: 2017/1/13
@@ -31,6 +38,8 @@ class Triangle {
     private int mPositionHandle;
     @SuppressWarnings("FieldCanBeLocal")
     private int mColorHandle;
+    // Use to access and set the view transformation
+    private int mMVPMatrixHandle;
 
     private final int vertexCount = triangleCoords.length / COORDS_PER_VERTEX;
     @SuppressWarnings("FieldCanBeLocal")
@@ -84,7 +93,7 @@ class Triangle {
         GLES20.glLinkProgram(mProgram);
     }
 
-    public void draw() {
+    public void draw(float[] mvpMatrix) { // pass in the calculated transformation matrix
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram);
 
@@ -108,6 +117,15 @@ class Triangle {
 
         // Set color for drawing the triangle
         GLES20.glUniform4fv(mColorHandle, 1, color, 0);
+
+        if (mvpMatrix != null) {
+            // get handle to shape's transformation matrix
+            mMVPMatrixHandle = GLES20.glGetUniformLocation(mProgram, "uMVPMatrix");
+
+            // Pass the projection and view transformation to the shader
+            // TODO: 2017/1/14 1 
+            GLES20.glUniformMatrix4fv(mMVPMatrixHandle, 1, false, mvpMatrix, 0);
+        }
 
         // 从数组缓存中的哪一位开始绘制，一般为0
         // Draw the triangle
