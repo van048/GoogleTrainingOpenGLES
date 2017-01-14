@@ -47,12 +47,9 @@ class Triangle {
     };
 
     // Set color with red, green, blue and alpha (opacity) values
-    // TODO: 2017/1/13  
     private final float[] color = {0.63671875f, 0.76953125f, 0.22265625f, 1.0f};
 
-    // TODO: 2017/1/13
     public Triangle() {
-        // TODO: 2017/1/13 vertex byte buffer && shape coordinates
         // TODO: 2017/1/13 direct byte buffer
         // initialize vertex byte buffer for shape coordinates
         ByteBuffer bb = ByteBuffer.allocateDirect(
@@ -107,11 +104,12 @@ class Triangle {
         // get handle to fragment shader's vColor member
         mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor");
 
-        // TODO: 2017/1/13 1 0
+        // 指明要更改的元素个数。如果目标uniform变量不是一个数组，那么这个值应该设为1；如果是数组，则应该设置为>=1。
+
         // Set color for drawing the triangle
         GLES20.glUniform4fv(mColorHandle, 1, color, 0);
 
-        // TODO: 2017/1/13 0
+        // 从数组缓存中的哪一位开始绘制，一般为0
         // Draw the triangle
         GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, vertexCount);
 
