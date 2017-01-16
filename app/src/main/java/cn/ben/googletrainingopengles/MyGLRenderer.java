@@ -3,7 +3,6 @@ package cn.ben.googletrainingopengles;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
-import android.os.SystemClock;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -20,6 +19,8 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
     private final float[] mViewMatrix = new float[16];
 
     private float[] mRotationMatrix = new float[16];
+    // TODO: 2017/1/16 volatile
+    private volatile float mAngle;
 
     public void onSurfaceCreated(GL10 unused, EGLConfig config) {
         // Set the background frame color
@@ -43,10 +44,11 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
 //        mTriangle.draw();
 
         // Create a rotation transformation for the triangle
-        long time = SystemClock.uptimeMillis() % 4000L;
-        float angle = 0.090f * ((int) time);
-        // TODO: 2017/1/16 -1 .0f
-        Matrix.setRotateM(mRotationMatrix, 0, angle, 0, 0, -1.0f);
+//        long time = SystemClock.uptimeMillis() % 4000L;
+//        float angle = 0.090f * ((int) time);
+//        // TODO: 2017/1/16 -1 .0f
+//        Matrix.setRotateM(mRotationMatrix, 0, angle, 0, 0, -1.0f);
+        Matrix.setRotateM(mRotationMatrix, 0, mAngle, 0, 0, -1.0f);
 
         // Set the camera position (View matrix)
         // TODO: 2017/1/14 Defines a viewing transformation in terms of an eye point, a center of view, and an up vector. 
@@ -89,5 +91,13 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glCompileShader(shader);
 
         return shader;
+    }
+
+    public void setAngle(float angle) {
+        mAngle = angle;
+    }
+
+    public float getAngle() {
+        return mAngle;
     }
 }
