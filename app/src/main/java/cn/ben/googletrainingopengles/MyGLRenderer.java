@@ -10,7 +10,7 @@ import javax.microedition.khronos.opengles.GL10;
 // draw a black background in the GLSurfaceView
 class MyGLRenderer implements GLSurfaceView.Renderer {
     private Triangle mTriangle;
-    @SuppressWarnings("FieldCanBeLocal")
+    @SuppressWarnings({"FieldCanBeLocal", "unused"})
     private Square mSquare;
 
     // mMVPMatrix is an abbreviation for "Model View Projection Matrix"
@@ -18,7 +18,7 @@ class MyGLRenderer implements GLSurfaceView.Renderer {
     private final float[] mProjectionMatrix = new float[16];
     private final float[] mViewMatrix = new float[16];
 
-    private float[] mRotationMatrix = new float[16];
+    private final float[] mRotationMatrix = new float[16];
     // TODO: 2017/1/16 volatile
     private volatile float mAngle;
 

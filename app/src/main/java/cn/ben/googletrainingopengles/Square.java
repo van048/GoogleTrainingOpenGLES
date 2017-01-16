@@ -5,6 +5,7 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
+@SuppressWarnings("unused")
 class Square {
 
     @SuppressWarnings("FieldCanBeLocal")

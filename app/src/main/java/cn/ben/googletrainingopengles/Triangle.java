@@ -39,6 +39,7 @@ class Triangle {
     @SuppressWarnings("FieldCanBeLocal")
     private int mColorHandle;
     // Use to access and set the view transformation
+    @SuppressWarnings("FieldCanBeLocal")
     private int mMVPMatrixHandle;
 
     private final int vertexCount = triangleCoords.length / COORDS_PER_VERTEX;

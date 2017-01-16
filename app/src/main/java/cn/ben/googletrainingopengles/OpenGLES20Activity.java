@@ -45,7 +45,7 @@ public class OpenGLES20Activity extends AppCompatActivity {
 
                     float dx = x - mPreviousX;
                     float dy = y - mPreviousY;
-                    
+
                     // TODO: 2017/1/16
                     // reverse direction of rotation above the mid-line
                     if (y > getHeight() / 2) {
